@@ -16,6 +16,8 @@ def fizzbuzz(num):
         return "Buzz"
     return num
     pass
+
+
 def fibonacci(n):
     """
     Return the `n`-th Fibonacci number (counting from 0).
@@ -26,6 +28,10 @@ def fibonacci(n):
         fibonacci(3) == 2
         fibonacci(4) == 3
     """
+    if(n < 2):
+        return n
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
     pass
 
 
@@ -38,6 +44,10 @@ def dot_product(a, b):
     Example:
         dot_product([1, 2, 3], [0, 3, 4]) == 1*0 + 2*3 + 3*4 == 18
     """
+    temp = 0
+    for i, j in zip(a, b):
+        temp += i*j
+    return temp
     pass
 
 
@@ -49,12 +59,14 @@ def redact(data, chars):
         redact("Hello world!", "lo")        # Hexxx wxrxd!
         redact("Secret message", "mse")     # Sxcrxt xxxxagx
     """
+    for char in chars:
+        data = data.replace(char, 'x')
+    return data
     pass
-
 
 def count_words(data):
     """
-    Return a dictionary that maps word -> number of occurences in `data`.
+    Return a dictionary that maps word -> number of occurrences in `data`.
     Words are separated by spaces (' ').
     Characters are case sensitive.
 
@@ -72,6 +84,15 @@ def count_words(data):
             'what': 1
         }
     """
+    word_count = {}
+    if(len(data) == 0):
+        return word_count
+    for word in data.split(' '):
+        if word in word_count:
+            word_count[word] = word_count[word] + 1
+        word_count[word] = word_count.get(word, 1)
+        word_count[word] = word_count[word]
+    return word_count
     pass
 
 
@@ -80,6 +101,9 @@ def bonus_fizzbuzz(num):
     Implement the `fizzbuzz` function.
     `if`, match-case and cycles are not allowed.
     """
+    fizz_result = "Fizz" * (num % 3 == 0)
+    buzz_result = "Buzz" * (num % 5 == 0)
+    return fizz_result + buzz_result or num
     pass
 
 
