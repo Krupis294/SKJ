@@ -8,11 +8,11 @@ def fizzbuzz(num):
         fizzbuzz(15) # FizzBuzz
         fizzbuzz(8) # 8
     """
-    if(num % 3 == 0 and num % 5 == 0):
+    if (num % 3 == 0 and num % 5 == 0):
         return "FizzBuzz"
-    elif(num % 3 ==0):
+    elif (num % 3 == 0):
         return "Fizz"
-    elif(num % 5 == 0):
+    elif (num % 5 == 0):
         return "Buzz"
     return num
     pass
@@ -28,7 +28,7 @@ def fibonacci(n):
         fibonacci(3) == 2
         fibonacci(4) == 3
     """
-    if(n < 2):
+    if (n < 2):
         return n
     else:
         return fibonacci(n - 1) + fibonacci(n - 2)
@@ -46,7 +46,7 @@ def dot_product(a, b):
     """
     temp = 0
     for i, j in zip(a, b):
-        temp += i*j
+        temp += i * j
     return temp
     pass
 
@@ -63,6 +63,7 @@ def redact(data, chars):
         data = data.replace(char, 'x')
     return data
     pass
+
 
 def count_words(data):
     """
@@ -85,7 +86,7 @@ def count_words(data):
         }
     """
     word_count = {}
-    if(len(data) == 0):
+    if (len(data) == 0):
         return word_count
     for word in data.split(' '):
         if word in word_count:
@@ -114,4 +115,12 @@ def bonus_utf8(cp):
         bonus_utf8(0x01) == [0x01]
         bonus_utf8(0x1F601) == [0xF0, 0x9F, 0x98, 0x81]
     """
+    if cp <= 0x7F:
+        return [cp]
+    elif cp <= 0x7FF:
+        return [(cp >> 6) | 0xC0, (cp & 0x3F) | 0x80]
+    elif cp <= 0xFFFF:
+        return [(cp >> 12) | 0xE0, ((cp >> 6) & 0x3F) | 0x80, (cp & 0x3F) | 0x80]
+    else:
+        return [(cp >> 18) | 0xF0, ((cp >> 12) & 0x3F) | 0x80, ((cp >> 6) & 0x3F) | 0x80, (cp & 0x3F) | 0x80]
     pass
